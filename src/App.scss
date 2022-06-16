@@ -1,0 +1,38 @@
+:root {
+  --text-color: #00adb5;
+  --icon-color: #8d86c9;
+  --background-color: #f7ece1;
+}
+
+body {
+  color: var(--icon-color);
+}
+
+.top-bar {
+  padding-left: 40px;
+  background: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .profile_menu {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .search {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .options_menu {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
