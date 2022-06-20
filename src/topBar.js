@@ -1,6 +1,6 @@
 import "./App.scss";
-import ProfileIcons from "./profileIcons";
 import { Button } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const TopBar = () => {
   return (
@@ -16,12 +16,17 @@ const TopBar = () => {
         <Button href="/celebs" className="item" variant="text">
           Celebrities
         </Button>
-        <Button className="item" variant="text" href="/browse">
+        <Button href="/browse" className="item" variant="text">
           Browse
         </Button>
       </div>
 
-      <ProfileIcons />
+      <div className="profile_menu">
+        <Button className="item" variant="text" href="/list">
+          My List
+        </Button>
+        <AccountCircleIcon fontSize="large" />
+      </div>
     </div>
   );
 };

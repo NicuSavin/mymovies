@@ -6,10 +6,10 @@
 
 body {
   color: var(--icon-color);
+  margin: 0;
 }
 
 .top-bar {
-  padding-left: 40px;
   background: var(--background-color);
   display: flex;
   align-items: center;
