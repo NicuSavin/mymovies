@@ -1,13 +1,15 @@
 import {
   Card,
-  CardActions,
   CardContent,
-  IconButton,
   Typography,
   Grid,
+  Box,
+  Modal,
+  Button,
 } from "@mui/material";
-
+import { useState } from "react";
 const DisplayCard = ({ card }) => {
+  const [popup, setPopup] = useState(false);
   let url = card.img1;
   if (!url) {
     url = card.img2;
@@ -42,6 +44,28 @@ const DisplayCard = ({ card }) => {
           </CardContent>
         </Card>
       </Grid>
+      <Modal open={popup}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "60%",
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+            height: "70%",
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            {card.title}
+          </Typography>
+          <Typography sx={{ mt: 2 }}>{card.overview}</Typography>
+          <Button onClick={() => setPopup(false)}>Close</Button>
+        </Box>
+      </Modal>
     </>
   );
 };
