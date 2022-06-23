@@ -1,9 +1,9 @@
-import TopBar from "./topBar";
+import TopBar from "./pages/components/TopBar";
 import { Navigate, Route, Routes } from "react-router-dom";
-import MainPage from "./pages/main";
-import MoviesPage from "./pages/movies";
-import SeriesPage from "./pages/series";
-import CelebsPage from "./pages/celebs";
+import MainPage from "./pages/Main";
+import MoviesPage from "./pages/Movies";
+import SeriesPage from "./pages/Series";
+import CelebsPage from "./pages/Celebs";
 function App() {
   return (
     <div>

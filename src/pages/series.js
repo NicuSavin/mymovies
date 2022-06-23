@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Filters from "./components/filters";
+import Filters from "./components/Filters";
 import { discoverSeries, searchSeries } from "./components/utils";
-import DisplayCard from "./components/displayCard";
+import DisplayCard from "./components/DisplayCard";
 import { Grid } from "@mui/material";
 const SeriesPage = () => {
   const [series, setSeries] = useState({ show: false, list: [] });
@@ -40,7 +40,7 @@ const SeriesPage = () => {
                 card={{
                   title: serie.name,
                   overview: serie.overview,
-                  button: true,
+                  card: "landscape",
                   img1: serie.backdrop_path,
                   img2: serie.poster_path,
                 }}

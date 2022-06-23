@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Filters from "./components/filters";
+import Filters from "./components/Filters";
 import { discoverMovies, searchMovies } from "./components/utils";
-import DisplayCard from "./components/displayCard";
+import DisplayCard from "./components/DisplayCard";
 import { Grid } from "@mui/material";
 const MoviesPage = () => {
   const [movies, setMovies] = useState({ show: false, list: [] });
@@ -34,7 +34,7 @@ const MoviesPage = () => {
     <>
       <Filters handleClick={handleClick} />
       {movies.show ? (
-        <Grid container spacing={2}>
+        <Grid container>
           {movies.list.map(function (movie, i) {
             if (movie) {
               return (
@@ -43,7 +43,7 @@ const MoviesPage = () => {
                   card={{
                     title: movie.original_title,
                     overview: movie.overview,
-                    button: true,
+                    card: "landscape",
                     img1: movie.backdrop_path,
                     img2: movie.poster_path,
                   }}
