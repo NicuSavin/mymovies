@@ -28,6 +28,22 @@ const CelebsPage = () => {
     }
   }
 
+  function knownForList(celeb) {
+    let temp = "Known for: ";
+    celeb.known_for.map(function (movie, index) {
+      if (movie.name) {
+        temp += '"' + movie.name + '"';
+      } else {
+        temp += '"' + movie.title + '"';
+      }
+      //skip comma after last element
+      if (index !== celeb.known_for.length - 1) {
+        temp += ", ";
+      }
+    });
+    return temp;
+  }
+
   return (
     <>
       <Filters handleClick={handleClick} />
@@ -39,7 +55,7 @@ const CelebsPage = () => {
                 key={i}
                 card={{
                   title: celeb.name,
-                  overview: "Here here",
+                  overview: knownForList(celeb),
                   button: false,
                   img1: celeb.profile_path,
                 }}
