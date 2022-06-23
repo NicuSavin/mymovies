@@ -2,50 +2,47 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
+  IconButton,
   Typography,
-  Button,
   Grid,
 } from "@mui/material";
 
 const DisplayCard = ({ card }) => {
   let url = card.img1;
-  if (url === null) {
+  if (!url) {
     url = card.img2;
   }
 
   return (
-    <Grid item maxWidth={375}>
-      <Card>
-        <CardMedia
-          component="img"
-          height="150"
-          image={
-            url
-              ? "https://image.tmdb.org/t/p/original" + url
-              : "http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg"
+    <>
+      <Grid item xs={6} sm={6} md={4} lg={3} xl={2} margin={3} minWidth={20}>
+        <Card
+          onClick={() => setPopup(!popup)}
+          className={
+            card.card === "landscape" ? "landscape-card" : "portrait-card"
           }
-          alt="image"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {card.title}
-          </Typography>
-        </CardContent>
+        >
+          <img
+            src={
+              url
+                ? "https://image.tmdb.org/t/p/original" + url
+                : "http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg"
+            }
+          ></img>
+          <CardContent>
+            <Typography className="title" gutterBottom variant="h6">
+              {card.title}
+            </Typography>
+          </CardContent>
 
-        <CardContent style={{ height: "100px", overflowY: "auto" }}>
-          <Typography variant="body2">{card.overview}</Typography>
-        </CardContent>
-
-        {card.button ? (
-          <CardActions>
-            <Button size="small">Add to list</Button>
-          </CardActions>
-        ) : (
-          <></>
-        )}
-      </Card>
-    </Grid>
+          <CardContent className="info">
+            <Typography style={{ textOverflow: "ellipsis" }} variant="body2">
+              {card.overview}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </>
   );
 };
 

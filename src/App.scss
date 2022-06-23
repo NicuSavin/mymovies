@@ -40,9 +40,42 @@ body {
 .filters {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   .filter {
     margin: 20px;
+  }
+}
+
+.landscape-card {
+  height: 400px;
+  img {
+    height: 40%;
+    width: 100%;
+  }
+  .title {
+    height: 20%;
+    text-overflow: ellipsis;
+  }
+  .info {
+    height: 35%;
+    overflow-y: auto;
+  }
+}
+
+.portrait-card {
+  height: 600px;
+  img {
+    height: 60%;
+    width: 100%;
+    aspect-ratio: 3/4;
+  }
+  .title {
+    height: 20%;
+    overflow-y: auto;
+  }
+  .info {
+    height: 20%;
+    overflow-y: auto;
   }
 }
