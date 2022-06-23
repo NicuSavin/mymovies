@@ -1,4 +1,4 @@
-import "./App.scss";
+import "../../App.scss";
 import { Button } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -6,7 +6,9 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="options_menu">
-        <h2 className="item">N N N</h2>
+        <h2 onClick={() => console.log("here")} className="item">
+          N N N
+        </h2>
         <Button href="/movies" className="item" variant="text">
           Movies
         </Button>
