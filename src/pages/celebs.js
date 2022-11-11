@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Filters from "./components/Filters";
+import Filters from "./components/filters";
 import { discoverCelebs, searchCelebs } from "./components/utils";
-import DisplayCard from "./components/DisplayCard";
+import DisplayCard from "./components/displayCard";
 import { Grid } from "@mui/material";
 const CelebsPage = () => {
   const [celebs, setCelebs] = useState({ show: false, list: [] });
@@ -57,7 +57,7 @@ const CelebsPage = () => {
                   title: celeb.name,
                   overview: knownForList(celeb),
                   card: "portrait",
-                  img1: celeb.profile_path,
+                  img: celeb.profile_path,
                 }}
               />
             );

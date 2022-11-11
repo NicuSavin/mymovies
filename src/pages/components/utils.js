@@ -1,5 +1,5 @@
 //input your TMDB API token from https://www.themoviedb.org/
-const apiToken = "";
+const apiToken = "39cb7cca10449e5b28bc89020b4d3cf8";
 const searchMovieUrl = new URL(
   "https://api.themoviedb.org/3/search/movie?api_key=" + apiToken
 );
@@ -18,6 +18,10 @@ const searchCelebUrl = new URL(
 const discoverCelebUrl = new URL(
   "https://api.themoviedb.org/3/person/popular?api_key=" + apiToken
 );
+const movieTrailerUrl =
+  "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=";
+
+const youtubeEmbedUrl = "https://www.youtube.com/embed/";
 const options = {
   method: "GET",
   headers: {
@@ -77,6 +81,27 @@ async function searchCelebs(obj) {
   return await response.json();
 }
 
+async function getMovieTrailer(id) {
+  let tempUrl = new URL(movieTrailerUrl.replace("{movie_id}", id) + apiToken);
+
+  let response = await fetch(tempUrl, options);
+
+  let videoList = await response.json();
+  let trailerObj = videoList.results.find((obj) => {
+    return obj.type === "Trailer" && obj.site === "YouTube";
+  });
+
+  // let yturl = new URL(
+  //   "https://www.youtube.com/oembed?url=" +
+  //     youtubeLink +
+  //     trailerObj.key +
+  //     "&format=json"
+  // );
+  // response = await fetch(yturl, options);
+  if (typeof trailerObj === "undefined") return undefined;
+  return youtubeEmbedUrl + trailerObj.key;
+}
+
 export {
   discoverMovies,
   searchMovies,
@@ -84,4 +109,5 @@ export {
   searchSeries,
   discoverCelebs,
   searchCelebs,
+  getMovieTrailer,
 };

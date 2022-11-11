@@ -21,13 +21,9 @@ const TopBar = () => {
         <Button href="/browse" className="item" variant="text">
           Browse
         </Button>
-      </div>
-
-      <div className="profile_menu">
-        <Button className="item" variant="text" href="/list">
+        <Button href="/mylist" className="item" variant="text">
           My List
         </Button>
-        <AccountCircleIcon fontSize="large" />
       </div>
     </div>
   );

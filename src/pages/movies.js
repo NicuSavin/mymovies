@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Filters from "./components/Filters";
+import { useState } from "react";
+import Filters from "./components/filters";
 import { discoverMovies, searchMovies } from "./components/utils";
-import DisplayCard from "./components/DisplayCard";
+import DisplayCard from "./components/displayCard";
 import { Grid } from "@mui/material";
 const MoviesPage = () => {
   const [movies, setMovies] = useState({ show: false, list: [] });
@@ -36,16 +36,23 @@ const MoviesPage = () => {
       {movies.show ? (
         <Grid container>
           {movies.list.map(function (movie, i) {
+            //2 possible images in object, getting the one that is not undefined
+            let img = movie.backdrop_path;
+            if (!img) {
+              if (!movie.poster_path) {
+                img = null;
+              } else img = movie.poster_path;
+            }
             if (movie) {
               return (
                 <DisplayCard
                   key={i}
                   card={{
+                    id: movie.id,
                     title: movie.original_title,
                     overview: movie.overview,
                     card: "landscape",
-                    img1: movie.backdrop_path,
-                    img2: movie.poster_path,
+                    img: img,
                   }}
                 />
               );

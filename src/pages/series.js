@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Filters from "./components/Filters";
+import Filters from "./components/filters";
 import { discoverSeries, searchSeries } from "./components/utils";
-import DisplayCard from "./components/DisplayCard";
+import DisplayCard from "./components/displayCard";
 import { Grid } from "@mui/material";
 const SeriesPage = () => {
   const [series, setSeries] = useState({ show: false, list: [] });
@@ -34,6 +34,13 @@ const SeriesPage = () => {
       {series.show && (
         <Grid container spacing={2}>
           {series.list.map(function (serie, i) {
+            //2 possible images in object, getting the one that is not undefined
+            let img = serie.backdrop_path;
+            if (!img) {
+              if (!serie.poster_path) {
+                img = null;
+              } else img = serie.poster_path;
+            }
             return (
               <DisplayCard
                 key={i}
@@ -41,8 +48,7 @@ const SeriesPage = () => {
                   title: serie.name,
                   overview: serie.overview,
                   card: "landscape",
-                  img1: serie.backdrop_path,
-                  img2: serie.poster_path,
+                  img: img,
                 }}
               />
             );
