@@ -1,19 +1,35 @@
 :root {
-  --text-color: #00adb5;
-  --icon-color: #8d86c9;
-  --background-color: #f7ece1;
+  --main-color: #0f3d3e;
+  // #8d86c9
+  --background-color: #ffead4;
+  --topBar-color: #ecb365;
+  --topBarBorder-color: 3px solid black;
+  font-size: larger;
+  margin: 10px;
 }
 
 body {
-  color: var(--icon-color);
+  color: var(--main-color);
   margin: 0;
+  background-color: var(--background-color);
 }
 
 .top-bar {
-  background: var(--background-color);
+  border: var(--topBarBorder-color);
+  background: var(--topBar-color);
+  background-image: linear-gradient(
+    var(--topBar-color) 0%,
+    var(--background-color) 95%
+  );
+
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+
+  .item {
+    text-decoration: inherit;
+    color: inherit;
+  }
 
   .profile_menu {
     flex: 1;
@@ -111,17 +127,5 @@ body {
     padding: 100px;
     align-items: center;
     justify-content: center;
-    .item {
-    }
-    // height: 95%;
   }
-}
-.watchLaterBox {
-  border: 2px solid black;
-}
-.favouriteBox {
-  border: 2px solid red;
-}
-.deleteBox {
-  border: 2px solid green;
 }
