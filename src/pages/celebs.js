@@ -56,7 +56,7 @@ const CelebsPage = () => {
                 card={{
                   title: celeb.name,
                   overview: knownForList(celeb),
-                  card: "portrait",
+                  type: "celebrity",
                   img: celeb.profile_path,
                 }}
               />

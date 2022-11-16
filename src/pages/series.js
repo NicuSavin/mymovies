@@ -45,9 +45,10 @@ const SeriesPage = () => {
               <DisplayCard
                 key={i}
                 card={{
+                  id: serie.id,
                   title: serie.name,
                   overview: serie.overview,
-                  card: "landscape",
+                  type: "serie",
                   img: img,
                 }}
               />

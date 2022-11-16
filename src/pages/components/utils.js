@@ -21,6 +21,9 @@ const discoverCelebUrl = new URL(
 const movieTrailerUrl =
   "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=";
 
+const seriesTrailerUrl =
+  "https://api.themoviedb.org/3/tv/{tv_id}/videos?api_key=";
+
 const youtubeEmbedUrl = "https://www.youtube.com/embed/";
 const options = {
   method: "GET",
@@ -83,6 +86,19 @@ async function searchCelebs(obj) {
 
 async function getMovieTrailer(id) {
   let tempUrl = new URL(movieTrailerUrl.replace("{movie_id}", id) + apiToken);
+  let response = await fetch(tempUrl, options);
+
+  let videoList = await response.json();
+  let trailerObj = videoList.results.find((obj) => {
+    return obj.type === "Trailer" && obj.site === "YouTube";
+  });
+
+  if (typeof trailerObj === "undefined") return undefined;
+  return youtubeEmbedUrl + trailerObj.key;
+}
+
+async function getSerieTrailer(id) {
+  let tempUrl = new URL(seriesTrailerUrl.replace("{tv_id}", id) + apiToken);
 
   let response = await fetch(tempUrl, options);
 
@@ -91,15 +107,24 @@ async function getMovieTrailer(id) {
     return obj.type === "Trailer" && obj.site === "YouTube";
   });
 
-  // let yturl = new URL(
-  //   "https://www.youtube.com/oembed?url=" +
-  //     youtubeLink +
-  //     trailerObj.key +
-  //     "&format=json"
-  // );
-  // response = await fetch(yturl, options);
   if (typeof trailerObj === "undefined") return undefined;
   return youtubeEmbedUrl + trailerObj.key;
+}
+
+function addWatchLater(card) {
+  let temp = JSON.parse(localStorage.getItem("watchLater"));
+  if (
+    temp.movies.some((e) => e.id === card.id) ||
+    temp.series.some((e) => e.id === card.id)
+  ) {
+    return;
+  }
+  if (card.type === "movie") {
+    temp.movies.push(card);
+  } else {
+    temp.series.push(card);
+  }
+  localStorage.setItem("watchLater", JSON.stringify(temp));
 }
 
 export {
@@ -110,4 +135,6 @@ export {
   discoverCelebs,
   searchCelebs,
   getMovieTrailer,
+  getSerieTrailer,
+  addWatchLater,
 };

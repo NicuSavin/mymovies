@@ -33,7 +33,7 @@ const MoviesPage = () => {
   return (
     <>
       <Filters handleClick={handleClick} />
-      {movies.show ? (
+      {movies.show && (
         <Grid container>
           {movies.list.map(function (movie, i) {
             //2 possible images in object, getting the one that is not undefined
@@ -51,7 +51,7 @@ const MoviesPage = () => {
                     id: movie.id,
                     title: movie.original_title,
                     overview: movie.overview,
-                    card: "landscape",
+                    type: "movie",
                     img: img,
                   }}
                 />
@@ -59,8 +59,6 @@ const MoviesPage = () => {
             }
           })}
         </Grid>
-      ) : (
-        <></>
       )}
     </>
   );

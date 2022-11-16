@@ -7,12 +7,15 @@ import {
   Modal,
   CardActionArea,
   Button,
-  useScrollTrigger,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import "../../App.scss";
-import { getMovieTrailer } from "../components/utils";
+import {
+  getMovieTrailer,
+  getSerieTrailer,
+  addWatchLater,
+} from "../components/utils";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const DisplayCard = ({ card }) => {
@@ -25,14 +28,22 @@ const DisplayCard = ({ card }) => {
       <Grid item xs={4} sm={4} md={3} lg={3} xl={2} margin={2} minWidth={200}>
         <Card
           onClick={() => {
-            setLoadingTrailer(true);
-            getMovieTrailer(card.id)
-              .then((url) => setTrailerUrl(url))
-              .finally(() => setLoadingTrailer(false));
-            setPopup(true);
+            if (card.type !== "celebrity") {
+              setLoadingTrailer(true);
+              if (card.type === "serie") {
+                getSerieTrailer(card.id)
+                  .then((url) => setTrailerUrl(url))
+                  .finally(() => setLoadingTrailer(false));
+              } else {
+                getMovieTrailer(card.id)
+                  .then((url) => setTrailerUrl(url))
+                  .finally(() => setLoadingTrailer(false));
+              }
+              setPopup(true);
+            }
           }}
           className={
-            card.card === "landscape" ? "landscape-card" : "portrait-card"
+            card.type === "celebrity" ? "portrait-card" : "landscape-card"
           }
           sx={{ maxWidth: 300 }}
         >
@@ -56,36 +67,47 @@ const DisplayCard = ({ card }) => {
           </CardActionArea>
         </Card>
       </Grid>
-      <Modal open={popup}>
-        <Box className="popup-box">
-          <div className="options">
-            <FavoriteIcon fontSize="large" />
-            <Button variant="outlined">Watch Later</Button>
-            <CloseIcon
-              className="closebtn"
-              variant="outlined"
-              onClick={() => setPopup(false)}
-            >
-              Close
-            </CloseIcon>
-          </div>
-          {loadingTrailer && <h3>Loading...</h3>}
-          {!loadingTrailer &&
-            (trailerUrl ? (
-              <iframe
-                className="video-player"
-                src={trailerUrl}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              <div className="no-video">
-                <img src="no-video-available.jpeg"></img>
-              </div>
-            ))}
-        </Box>
-      </Modal>
+      {card.type === "celebrity" ? (
+        <></>
+      ) : (
+        <Modal open={popup}>
+          <Box className="popup-box">
+            <div className="options">
+              <FavoriteIcon fontSize="large" />
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  addWatchLater(card);
+                }}
+              >
+                Watch Later
+              </Button>
+              <CloseIcon
+                className="closebtn"
+                variant="outlined"
+                onClick={() => setPopup(false)}
+              >
+                Close
+              </CloseIcon>
+            </div>
+            {loadingTrailer && <h3>Loading...</h3>}
+            {!loadingTrailer &&
+              (trailerUrl ? (
+                <iframe
+                  className="video-player"
+                  src={trailerUrl}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="no-video">
+                  <img src="no-video-available.jpeg"></img>
+                </div>
+              ))}
+          </Box>
+        </Modal>
+      )}
     </>
   );
 };
