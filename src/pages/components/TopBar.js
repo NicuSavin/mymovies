@@ -1,6 +1,5 @@
 import "../../App.scss";
-import { Button } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
 
 const TopBar = () => {
   return (
@@ -9,21 +8,18 @@ const TopBar = () => {
         <h2 onClick={() => console.log("here")} className="item">
           N N N
         </h2>
-        <Button href="/movies" className="item" variant="text">
+        <Link to="/movies" className="item">
           Movies
-        </Button>
-        <Button href="/series" className="item" variant="text">
+        </Link>
+        <Link to="/series" className="item">
           Series
-        </Button>
-        <Button href="/celebs" className="item" variant="text">
+        </Link>
+        <Link to="/celebs" className="item">
           Celebrities
-        </Button>
-        <Button href="/browse" className="item" variant="text">
-          Browse
-        </Button>
-        <Button href="/mylist" className="item" variant="text">
+        </Link>
+        <Link to="/mylist" className="item">
           My List
-        </Button>
+        </Link>
       </div>
     </div>
   );
