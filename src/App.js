@@ -5,12 +5,17 @@ import MoviesPage from "./pages/movies";
 import SeriesPage from "./pages/series";
 import CelebsPage from "./pages/celebs";
 import PageNotFound from "./pages/components/pageNotFound";
+import MyList from "./pages/myList";
 function App() {
   if (!localStorage.getItem("watchLater")) {
     localStorage.setItem(
       "watchLater",
       JSON.stringify({ movies: [], series: [] })
     );
+  }
+
+  if (!localStorage.getItem("watched")) {
+    localStorage.setItem("watched", JSON.stringify({ movies: [], series: [] }));
   }
   return (
     <div>
